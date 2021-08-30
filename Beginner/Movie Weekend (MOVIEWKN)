@@ -1,0 +1,89 @@
+#include <iostream>
+
+using namespace std;
+
+int main() {
+
+  // your code goes here
+  int t;
+  cin >> t;
+  while (t--) {
+    int n;
+    cin >> n;
+    int * l = new int[n];
+    int * r = new int[n];
+
+    for (int i = 0; i < n; i++) {
+      cin >> l[i];
+    }
+    for (int i = 0; i < n; i++) {
+      cin >> r[i];
+    }
+    int max = 0;
+    for (int i = 0; i < n; i++) {
+      int prod = l[i] * r[i];
+      if (prod > max) {
+        max = prod;
+
+      }
+    }
+
+    int * flag = new int[max * n];
+    for (int i = 0; i < max; i++) {
+      for (int j = 0; j < n; j++) {
+        *(flag + i * n + j) = -1;
+      }
+    }
+    for (int i = 0; i < n; i++) {
+      int prod = l[i] * r[i];
+
+      if (prod == max) {
+        max = prod;
+        flag[max + i] = i;
+      }
+    }
+
+    int indes[100] = {
+      0
+    };
+
+    int flags = 0, rmax = 0, index, k = 0;
+    for (int i = 0; i < n; i++) {
+      if (flag[max + i] != -1) {
+        if (r[flag[max + i]] > rmax) {
+          rmax = r[flag[max + i]];
+          index = flag[max + i];
+        }
+      }
+    }
+    for (int i = 0; i < n; i++) {
+      if (flag[max + i] != -1) {
+        if (r[flag[max + i]] == rmax) {
+
+          rmax = r[flag[max + i]];
+          flags = 1;
+          indes[k] = flag[max + i];
+          k++;
+
+        }
+      } else {
+        continue;
+      }
+
+    }
+
+    if (flags == 0) {
+      cout << index + 1 << endl;
+    } else {
+      int min = indes[0];
+      for (int i = 0; i < k; i++) {
+
+        if (indes[i] < min) {
+          min = indes[i];
+        }
+      }
+      cout << min + 1 << endl;
+    }
+  }
+  return 0;
+}
