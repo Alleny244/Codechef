@@ -1,0 +1,23 @@
+#include <stdio.h>
+
+int main(void) {
+  // your code goes here
+  int withdraw;
+  float amount, balance;
+
+  scanf("%d", & withdraw);
+
+  scanf("%f", & amount);
+
+  if (withdraw % 5 == 0) {
+    if (withdraw + 0.50 > amount) {
+      printf("%0.2f", amount);
+    } else {
+      balance = amount - withdraw - 0.50;
+      printf("%.2f", balance);
+    }
+  } else {
+    printf("%.2f", amount);
+  }
+  return 0;
+}
