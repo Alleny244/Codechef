@@ -1,0 +1,30 @@
+
+
+class Solution {
+public:
+    bool isPalindrome(int x) {
+     int flag=0;
+        bool p=true;
+        int a=x;
+        vector <int> digits;
+        if(a<0){
+            flag=1;
+        }
+        while(a!=0){
+            int rem=a%10;
+            digits.push_back(rem);
+            a/=10;
+        }
+     
+        for(int i=0,j=digits.size()-1;i<j;i++,j--){
+            if(digits[i]!=digits[j]){
+                flag=1;
+                break;
+            }
+        }
+        if(flag==1){
+           p=false; 
+        }
+        return p;
+    }
+};
